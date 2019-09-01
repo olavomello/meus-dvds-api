@@ -7,10 +7,15 @@ const conn  =   mysql.createConnection({
     database    :   "dvds"
 });
 
-conn.connect( (err) =>{
-    if( err ){
-        // DB Error
+try{
+    conn.connect( (err) =>{
+        if( err )
         console.error("DB error : " + err );
-    }
+    });
+} catch(ex){}
+
+conn.on('error', (err) =>{
+    console.error("Conn error : " + err );
 });
+
 module.exports = conn;
