@@ -1,5 +1,5 @@
-﻿const mysql = require("mysql");
-const conn  = mysql.createConnection({
+﻿const mysql =   require("mysql");
+const conn  =   mysql.createConnection({
     host        :   "68.233.247.70",
     port        :   3306,
     user        :   "dvds",
@@ -13,5 +13,4 @@ conn.connect( (err) =>{
         console.error("DB error : " + err );
     }
 });
-
 module.exports = conn;
