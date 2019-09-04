@@ -4,7 +4,7 @@ const conn  =   mysql.createConnection({
     port        :   3306,
     user        :   "",
     password    :   "",
-    database    :   ""
+    database    :   "dvds"
 });
 
 try{
