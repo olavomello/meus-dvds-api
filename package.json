@@ -1,0 +1,23 @@
+{
+  "name": "Meus-DVDs",
+  "version": "1.0.0",
+  "description": "Controle de DVDs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "git": "^0.1.5",
+    "mysql": "^2.17.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}

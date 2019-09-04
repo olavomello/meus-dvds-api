@@ -61,44 +61,35 @@ const Update = async ( resultJson ) =>{
         let num_movie_id        =   resultJson[i].num_id;
         let num_themoviedb_id   =   resultJson[i].num_themoviedb_id;
         let str_movie_name      =   resultJson[i].str_nome;
-        let str_movie_cover     =   resultJson[i].str_cover_url;
+        let str_movie_cover     =   resultJson[i].str_cover_url;        
 
         if( str_movie_name && ( !str_movie_cover || str_movie_cover == null ) ){
             // Cover
-            //console.log("Search cover to movie : ["+str_movie_name+"]");
+            // console.log("Search cover to movie : ["+str_movie_name+"]");
             str_movie_cover = await getCover( str_movie_name ).then( function ( str_movie_cover ){
 
                 // console.log("Cover read :" + str_movie_cover  );
                 if( str_movie_cover ){
                     // Add cover
-                    console.log("Cover found : ["+str_movie_cover+"]");
+                    //console.log("Cover found : ["+str_movie_cover+"]");
                     
                     // Update str_cover_url on result json
                     resultJson[i].str_cover_url =   str_movie_cover;
-                    console.log("JSON cover["+i+"] : ["+resultJson[i]+"]");
-                    console.log("JSON cover["+i+"].str_cover_url : ["+resultJson[i].str_cover_url+"]");
 
                     // Salve Movie Cover on DB
                     let SQL     =   "UPDATE tab_dvds SET str_cover_url = '"+str_movie_cover+"'WHERE num_id ='"+num_movie_id+"' LIMIT 1";
-                    /*
                     conn.query( SQL, function (error, results, fields) {
-                        if( error )
-                            console.warn("Cover save error ");
+                        if( error ) console.warn("Cover save error");
                     });
-                    */
                 }                        
             });
-            // console.log("Cover : ["+str_movie_cover+"]");
         } else {
             // Cover exists
             // console.log("Cover Exists : ["+str_movie_cover+"]");
-        }
-
-        console.log("Movie ID : " + num_movie_id);
-        console.log("Movie Name : " + str_movie_name);
-        console.log("Movie Cover : " + str_movie_cover);
-        console.log("Movie ID on Movie DB : " + num_themoviedb_id);       
-    }    
+        }    
+    } // end if for
+    
+    return resultJson;
 }
 
 const Movies = {
@@ -120,11 +111,15 @@ const Movies = {
                 
                 let resultJson      =   JSON.stringify(results);
                 resultJson          =   JSON.parse(resultJson);
-                let apiResult       =   {};
-                apiResult.total     =   resultJson.length;
-                apiResult.movies    =   resultJson;
-                // Return
-                res.json(apiResult);
+
+                // Update
+                Update(resultJson).then(function( request, response ){
+                    let apiResult       =   {};
+                    apiResult.total     =   resultJson.length;
+                    apiResult.movies    =   resultJson;
+                    // Return
+                    res.json(apiResult);
+                });
             });            
         },
         /* FIND MOVIE BY ID */
@@ -147,11 +142,15 @@ const Movies = {
                 
                 let resultJson      =   JSON.stringify(results);
                 resultJson          =   JSON.parse(resultJson);
-                let apiResult       =   {};
-                apiResult.total     =   resultJson.length;
-                apiResult.movies    =   resultJson;
-                // Return
-                res.json(apiResult);
+
+                // Update
+                Update(resultJson).then(function( request, response ){
+                    let apiResult       =   {};
+                    apiResult.total     =   resultJson.length;
+                    apiResult.movies    =   resultJson;
+                    // Return
+                    res.json(apiResult);
+                });
             });
         },  
         /* FIND MOVIE BY NAME */
@@ -160,7 +159,7 @@ const Movies = {
             let pathname    =   req._parsedUrl.pathname.split('/');
             let name        =   decodeURI(pathname[3]);
 
-            let SQL     =   "SELECT * FROM tab_dvds WHERE str_nome LIKE '%"+ name +"%' ORDER BY str_nome ASC";
+            let SQL         =   "SELECT * FROM tab_dvds WHERE str_nome LIKE '%"+ name +"%' ORDER BY str_nome ASC";
             
             conn.query( SQL, function (error, results, fields) {
                 if (error) {
@@ -173,9 +172,9 @@ const Movies = {
                     res.json(apiResult);
                 }
                 
-                // Movie Data
-                let resultJson      =   JSON.stringify(results);
-                resultJson          =   JSON.parse(resultJson);
+                // Movie Data ok
+                let resultJson          =   JSON.stringify(results);
+                resultJson              =   JSON.parse(resultJson);
 
                 // Update
                 Update(resultJson).then(function( request, response ){
@@ -207,11 +206,14 @@ const Movies = {
                 
                 let resultJson      =   JSON.stringify(results);
                 resultJson          =   JSON.parse(resultJson);
-                let apiResult       =   {};
-                apiResult.total     =   resultJson.length;
-                apiResult.movies    =   resultJson;
-                // Return
-                res.json(apiResult);
+                // Update
+                Update(resultJson).then(function( request, response ){
+                    let apiResult       =   {};
+                    apiResult.total     =   resultJson.length;
+                    apiResult.movies    =   resultJson;
+                    // Return
+                    res.json(apiResult);
+                });
             });
         },
         /* GENRES LIST */
