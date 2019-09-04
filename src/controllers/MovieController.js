@@ -76,7 +76,7 @@ const Update = async ( resultJson ) =>{
                     // Update str_cover_url on result json
                     resultJson[i].str_cover_url =   str_movie_cover;
 
-                    // Salve Movie Cover on DB
+                    // Save Movie Cover on DB
                     let SQL     =   "UPDATE tab_dvds SET str_cover_url = '"+str_movie_cover+"'WHERE num_id ='"+num_movie_id+"' LIMIT 1";
                     conn.query( SQL, function (error, results, fields) {
                         if( error ) console.warn("Cover save error");

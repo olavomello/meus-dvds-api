@@ -5,7 +5,6 @@
 ### 
 src/db.js
 node_modules
-.gitignore
 
 ### Node ###
 # Logs
