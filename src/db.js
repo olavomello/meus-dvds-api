@@ -1,10 +1,10 @@
 ﻿const mysql =   require("mysql");
 // Configs DB Connection
 var db_config = {
-    host        : '68.233.247.70',
-    user        : 'dvds',
-    password    : 'vGN@PhG1IId39nO',
-    database    : 'dvds',
+    host        : '',
+    user        : '',
+    password    : '',
+    database    : '',
     port        : 3306
   };
 
