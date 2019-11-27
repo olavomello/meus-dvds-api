@@ -6,8 +6,14 @@
   "scripts": {
     "dev": "nodemon server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+                "dvds",
+                "movies",
+                "series",
+                "mysql",
+                "node"
+              ],
+  "author": "Olavo Mello",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.19.1"
