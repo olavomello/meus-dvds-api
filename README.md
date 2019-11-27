@@ -1,4 +1,5 @@
 # meus-dvds-api
 Meus DVDS  > API - WEBSERVICE ( node )
 
-Integrate MySQL DB data with ThemovieDB.org to show my own movies, series and shows with perfect cover and infos ;)  
+[ Integrate MySQL DB + ThemovieDB.org ]
+Show Movies and Series with perfect cover and infos ;)  
